@@ -22,3 +22,17 @@ const delayedHello = (displayGreeting: DisplayGreeting): void => {
 };
 
 delayedHello(displayGreeting);
+
+// 3) Math Callback 
+type DisplayResult = (result: number) => void;
+
+const addNumbers = (a: number, b: number, displayResult: DisplayResult): void => {
+    const result = a + b;
+    displayResult(result);
+}
+
+const displayResult = (result: number): void => {
+    console.log(`The result is: ${result}`);
+}
+
+addNumbers(21, 55, displayResult);
