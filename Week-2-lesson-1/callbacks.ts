@@ -11,3 +11,14 @@ const displayGreeting = (greeting: string): void => {
 }
 
 hello(displayGreeting);
+
+
+// 2) Delayed Greeting 
+const delayedHello = (displayGreeting: DisplayGreeting): void => {
+    setTimeout(() => {
+        const greeting = "Hi, I am late!";
+        displayGreeting(greeting);
+    }, 2000);
+};
+
+delayedHello(displayGreeting);
