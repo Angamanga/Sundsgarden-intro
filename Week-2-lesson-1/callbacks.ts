@@ -36,3 +36,19 @@ const displayResult = (result: number): void => {
 }
 
 addNumbers(21, 55, displayResult);
+
+// 4) Uppercase Callback 
+type GetString = (text: string) => string;
+
+const makeUpperCase = (text: string, getString: GetString): string => {
+    const upperCaseText = text.toUpperCase();
+    return getString(upperCaseText);
+}
+
+const getString = (text: string): string => {
+    return text;
+}
+
+console.log(makeUpperCase("Hi I am about to get uppercased", getString));
+
+
