@@ -51,4 +51,17 @@ const getString = (text: string): string => {
 
 console.log(makeUpperCase("Hi I am about to get uppercased", getString));
 
+// 5) Pizza Order 
+type PizzaStatus = (status: string) => void;
 
+const orderPizza = (pizzaStatus: PizzaStatus): void => {
+    setTimeout(() => {
+        pizzaStatus("Your pizza is ready!!");
+    }, 3000);
+};
+
+const pizzaStatus = (status: string): void => {
+    console.log(status);
+};
+
+orderPizza(pizzaStatus);
