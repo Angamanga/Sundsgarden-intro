@@ -65,3 +65,18 @@ const pizzaStatus = (status: string): void => {
 };
 
 orderPizza(pizzaStatus);
+
+// 6) Multiple Messages 
+type PrintMessage = (message: string) => void;
+
+const threeMessages = (printMessage: PrintMessage): void => {
+    const messages = ["Hi there!", "How are you?", "Where is the coffee?"];
+    for (const message of messages) {
+        printMessage(message);
+    }
+}
+const printMessage = (message: string): void => {
+    console.log(message);
+}
+
+threeMessages(printMessage);
