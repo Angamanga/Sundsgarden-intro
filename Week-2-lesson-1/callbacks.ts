@@ -95,3 +95,26 @@ const statusReport = (report: string): void => {
 }
 
 downloadFile("http://api.example.com", statusReport );
+
+// 8) Success and Error Callback 
+type ResponseHandler = (message: string) => void;
+
+const errorOrNot = (successHandler: ResponseHandler, errorHandler: ResponseHandler): void => {
+    // Checking if the random number between 1-100 is even or odd, then calling respective callback.
+    const isEven = Math.floor((Math.random() * 100) + 1) % 2 === 0;
+    if (isEven) {
+        successHandler("Yay success!");
+    } else {
+        errorHandler("Oops we got an error!");
+    }
+};
+
+const errorHandler = (message: string): void => {
+    console.error(message);
+};
+
+const successHandler = (message: string): void => {
+    console.log(message);    
+};
+
+errorOrNot(successHandler, errorHandler);
