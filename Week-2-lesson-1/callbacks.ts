@@ -118,3 +118,34 @@ const successHandler = (message: string): void => {
 };
 
 errorOrNot(successHandler, errorHandler);
+
+// 9) Math with Different Operations 
+// Inspired by feedback from assingment 2, week 1 :) 
+type Operator = "add" | "subtract" | "multiply" | "divide";
+type DisplayCalculatorResult = (result: number) => void;
+
+interface Operations {
+    add: (a: number, b: number) => number;
+    subtract: (a: number, b: number) => number;
+    multiply: (a: number, b: number) => number;
+    divide: (a: number, b: number) => number;
+}
+
+const calculateThings = (a: number, b: number, operation: Operator, callback: DisplayCalculatorResult): void => {
+    const operations: Operations = {
+        add: (a: number, b: number) => a + b,
+        subtract: (a: number, b: number) => a - b,
+        multiply: (a: number, b: number) => a * b,
+        divide: (a: number, b: number) => a / b,
+    };
+
+    const result = operations[operation](a, b);
+    callback(result);
+};
+
+const displayCalculatorResult = (result: number): void => {
+    console.log(`The result is: ${result}`);
+};
+
+calculateThings(4, 5, "add", displayCalculatorResult);
+calculateThings(10, 10, "multiply", displayCalculatorResult);
