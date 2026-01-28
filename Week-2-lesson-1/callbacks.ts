@@ -80,3 +80,18 @@ const printMessage = (message: string): void => {
 }
 
 threeMessages(printMessage);
+
+// 7) Download Simulation 
+type StatusReport = (report: string) => void;
+const downloadFile = (url: string, callback: StatusReport): void => {
+    console.log("Download started...");
+    setTimeout(() => {
+        callback(`Downloaded data from ${url}`);
+    }, 2000);
+}
+
+const statusReport = (report: string): void => {
+    console.log(report);
+}
+
+downloadFile("http://api.example.com", statusReport );
