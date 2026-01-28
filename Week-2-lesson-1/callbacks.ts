@@ -149,3 +149,32 @@ const displayCalculatorResult = (result: number): void => {
 
 calculateThings(4, 5, "add", displayCalculatorResult);
 calculateThings(10, 10, "multiply", displayCalculatorResult);
+
+// 10) Chained Callbacks 
+type Callback = () => void;
+
+const step1 = (callback: Callback): void => {
+    setTimeout(() => {
+        console.log("Step 1 done");
+        callback();
+    }, 1000);
+};
+
+const step2 = (callback: Callback): void => {
+    setTimeout(() => {
+        console.log("Step 2 done");
+        callback();
+    }, 1000);
+};
+
+const step3 = (): void => {
+    setTimeout(() => {
+        console.log("Step 3 done!");
+    }, 1000);
+};
+
+step1(() => {
+    step2(() => {
+        step3();
+    });
+});
