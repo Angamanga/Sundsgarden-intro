@@ -148,3 +148,13 @@ const wrapInArray = <T>(item: T): T[] => {
 console.log(wrapInArray("An apple"));
 console.log(wrapInArray(45));
 console.log(wrapInArray(true));
+
+// Exercise 2: 
+const firstItem = <T>(items: T[]): T | undefined => {
+    return items[0];
+}
+
+console.log(firstItem([1, 2, 3]));
+console.log(firstItem(["a", "b", "c"]));
+console.log(firstItem([]));
+ 
