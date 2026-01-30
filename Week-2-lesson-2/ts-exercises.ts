@@ -136,3 +136,15 @@ const printRole = (role: Role): void => {
 
 printRole(Role.Guest);
 printRole(Role.Admin);
+
+
+// 4. Generics
+
+// Exercise 1: 
+const wrapInArray = <T>(item: T): T[] => {
+    return [item];
+};
+
+console.log(wrapInArray("An apple"));
+console.log(wrapInArray(45));
+console.log(wrapInArray(true));
