@@ -1,3 +1,5 @@
+// 1. Union Types
+
 // Exercise 1: 
 type IDType = number | string;
 
@@ -17,3 +19,14 @@ const eatFruit = (fruit: Fruit): void => {
 
 eatFruit("apple");
 eatFruit("orange");
+
+// Exercise 3: 
+type Result = boolean;
+
+const printResult = (result: Result): void => {
+    result ? console.log("Pass") : console.log("Fail");
+};
+
+printResult(true);
+printResult(false);
+ 
