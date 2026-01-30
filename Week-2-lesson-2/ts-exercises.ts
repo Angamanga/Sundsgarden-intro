@@ -71,3 +71,16 @@ const teacher = {
 };
 
 printTeacherInfo(teacher);
+
+// Exercise 3: 
+interface Car {
+    brand: string;
+    year: number;
+}
+
+const printCar = (car: Car): void => {
+    const { brand, year } = car;
+    console.log(`Brand: ${brand}, Year: ${year}`);
+};
+
+printCar({ brand: "Subaru Vortex", year: 1989 });
