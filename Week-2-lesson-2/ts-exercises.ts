@@ -112,3 +112,27 @@ const orderPizza = (size: PizzaSize): void => {
 };
 
 orderPizza(PizzaSize.Large);
+
+// Exercise 3: 
+enum Role {
+    Admin = "admin",
+    User = "user",
+    Guest = "guest"
+}
+
+const printRole = (role: Role): void => {
+    switch (role) {
+        case Role.Admin:
+            console.log("You have full access");
+            break;
+        case Role.User:
+            console.log("You have limited access");
+            break;
+        case Role.Guest:
+            console.log("You have guest access");
+            break;
+    }
+};
+
+printRole(Role.Guest);
+printRole(Role.Admin);
