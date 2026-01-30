@@ -29,4 +29,17 @@ const printResult = (result: Result): void => {
 
 printResult(true);
 printResult(false);
- 
+
+// 2. Interfaces and Type Aliases
+
+// Exercise 1: 
+interface Book {
+    title: string;
+    pages: number;
+}
+
+const describeBook = (book: Book): void => {
+    console.log(`The book ${book.title} has ${book.pages} pages`);
+};
+
+describeBook({ title: "Careless People, a story of where I used to work", pages: 400 });
