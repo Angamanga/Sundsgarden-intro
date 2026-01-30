@@ -43,3 +43,33 @@ const describeBook = (book: Book): void => {
 };
 
 describeBook({ title: "Careless People, a story of where I used to work", pages: 400 });
+
+// Exercise 2: 
+interface Teacher {
+    name: string;
+    subject: string;
+}
+
+interface Employee {
+    id: number;
+    email: string;
+}
+
+type SchoolTeacher = Teacher & Employee;
+
+const printTeacherInfo = (schoolTeacher: SchoolTeacher): void => {
+    const { name, subject, id, email } = schoolTeacher;
+    console.log(`- Name: ${name}`);
+    console.log(`- Teaches subject: ${subject}`);
+    console.log(`- ID: ${id}`);
+    console.log(`- Email: ${email}`);
+};
+
+const teacher = {
+    name: "Joan",
+    subject: "Maths",
+    id: 22,
+    email: "joan@example.com"
+};
+
+printTeacherInfo(teacher);
