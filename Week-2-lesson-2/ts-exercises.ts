@@ -158,3 +158,10 @@ console.log(firstItem([1, 2, 3]));
 console.log(firstItem(["a", "b", "c"]));
 console.log(firstItem([]));
  
+// Exercise 3:
+const swap = <T>(item1: T, item2: T): T[] => {
+    return [item2, item1];
+};
+
+console.log(swap(1, 2));
+console.log(swap("apple", "pear"));
