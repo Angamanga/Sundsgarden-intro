@@ -99,3 +99,16 @@ const showColor = (color: Color): void => {
 };
 
 showColor(Color.Red);
+
+// Exercise 2: 
+enum PizzaSize { 
+    Small = "Small",
+    Medium = "Medium",
+    Large =  "Large"
+};
+
+const orderPizza = (size: PizzaSize): void => {
+    console.log(`You ordered a ${size} pizza.`);
+};
+
+orderPizza(PizzaSize.Large);
