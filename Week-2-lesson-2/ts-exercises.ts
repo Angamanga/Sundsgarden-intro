@@ -84,3 +84,18 @@ const printCar = (car: Car): void => {
 };
 
 printCar({ brand: "Subaru Vortex", year: 1989 });
+
+// 3. Enums
+
+// Exercise 1: 
+enum Color {
+    Red = "Red",
+    Green = "Green",
+    Blue = "Blue"
+}
+
+const showColor = (color: Color): void => {
+    console.log(`You choose ${color}`);
+};
+
+showColor(Color.Red);
