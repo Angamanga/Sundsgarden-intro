@@ -58,11 +58,9 @@ interface Employee {
 type SchoolTeacher = Teacher & Employee;
 
 const printTeacherInfo = (schoolTeacher: SchoolTeacher): void => {
-    const { name, subject, id, email } = schoolTeacher;
-    console.log(`- Name: ${name}`);
-    console.log(`- Teaches subject: ${subject}`);
-    console.log(`- ID: ${id}`);
-    console.log(`- Email: ${email}`);
+    for (const [key, value] of Object.entries(schoolTeacher)) {
+        console.log(`- ${key}: ${value}`);
+    }
 };
 
 const teacher = {
