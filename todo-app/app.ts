@@ -1,9 +1,14 @@
-import readline from "readline";
+import * as readline from "readline";
+import chalk from "chalk";
 
+// Define colour-type (Could be more colours but I decided to go with a 
+// limited number of choices for this task)
+type TodoColour = "green" | "red" | "blue" | "yellow" | "black";
 // Define Todo type
 type Todo = {
   id: number;
   text: string;
+  colour: TodoColour;
 }
 
 // Store todos in memory (array)
@@ -15,21 +20,36 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Checking if the colour is allowed
+const checkColour = (colour: string): TodoColour => {
+  const allowedColours = ["green", "red", "blue", "yellow", "black"];
+  if(allowedColours.includes(colour)) {
+    // explicitly setting the type as TodoColour
+    return colour as TodoColour;
+  } 
+  // using black as default if no colour or an invalid colour is added
+  return "black";
+}
+
 // Add a new todo
 const addTodo = (): void => {
   rl.question("Enter task: ", (text: string) => {
     if (text.trim() === "") {
       console.log("Task cannot be empty!\n");
+      showMenu()
     } else {
-      const newTodo: Todo = {
-        id: Date.now(),
-        text: text.trim(),
+      rl.question("Enter colour (green, red, blue or yellow):", (colour: string)=> {
+        // Assigning data including colour to the todo
+        const newTodo: Todo = {
+          id: Date.now(),
+          text: text.trim(),
+          colour: checkColour(colour.trim().toLowerCase())
       };
-
-      todos.push(newTodo);
-      console.log("✓ Task added successfully!\n");
+          todos.push(newTodo);
+          console.log(chalk.magentaBright("✓ Task added successfully!\n"));
+          showMenu();
+      });
     }
-    showMenu();
   });
 };
 
@@ -40,11 +60,12 @@ const listTodos = (): void => {
   console.log("Commands: add, list, remove, exit\n");
 
   if (todos.length === 0) {
-    console.log("No todos yet!\n");
+    console.log(chalk.red("No todos yet!\n"));
   } else {
     console.log("Your Todos:");
     todos.forEach((todo: Todo) => {
-      console.log(`${todo.id}. ${todo.text}`);
+      // using the colour when logging the todo
+      console.log(chalk[todo.colour](`${todo.id}. ${todo.text}`));
     });
     console.log("");
   }
@@ -99,7 +120,7 @@ const handleCommand = (command: string): void => {
 // Show menu and handle commands
 const showMenu = (): void => {
   console.clear();
-  console.log("\n=== Todo List App ===");
+  console.log(chalk.greenBright("\n=== Todo List App ==="));
   console.log("Commands: add, list, remove, exit\n");
   process.stdout.write("> ");
   rl.question("", (command: string) => {
