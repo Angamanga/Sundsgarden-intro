@@ -85,30 +85,55 @@ const mapWith = (numberList: number[], callback: Callback): number[] => {
 console.log(mapWith([1, 2, 3], addTwo));
 // should output [ 3, 4, 5 ]
 
-// // ________________________________________________________________________________________________
-// // Challenge 6
-// /* 
-// The function reduce takes an array and reduces the elements to a single value. 
-// For example it can sum all the numbers, multiply them, 
-// or any operation that you can put into a function.
-// */
+// ________________________________________________________________________________________________
+// Challenge 6
+/* 
+The function reduce takes an array and reduces the elements to a single value. 
+For example it can sum all the numbers, multiply them, 
+or any operation that you can put into a function.
+*/
+type CallbackFunction =  (a: number, b: number) => number;
+const reduce = (numbers: number[], operation: CallbackFunction, startValue: number): number => {
+    let result:number = startValue;
+    for(let i = 0; i < numbers.length; i++){
+        result =  operation(result, numbers[i]);
+        }
+        return result;
+}
+const nums = [4, 1, 3];
+const add = function (a, b) {
+  return a + b;
+};
+console.log(reduce(nums, add, 0))
+// should output 8
 
-// // const nums = [4, 1, 3];x
-// // const add = function (a, b) {
-// //   return a + b;
-// // };
-// // console.log(reduce(nums, add, 0))
+// Just to be sure, testing with multiply 
+const mult = function(a:number, b:number) {
+    return a * b;
+}
+//should output 12
+console.log(reduce(nums, mult, 1))
 
-// //should output 8
+// ________________________________________________________________________________________________
+// Challenge 7
+/* Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs. BONUS: Use reduce!
+ */
 
-// // ________________________________________________________________________________________________
-// // Challenge 7
-// /* Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs. BONUS: Use reduce!
-//  */
-// console.log(
-//   intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
-// );
-// // should log: [5, 15]
+
+//  I could not solve using reduce without asking the internet so this is my out-of-my head solution :D 
+const intersection = <T>(arr1: T[], arr2: T[], arr3: T[]): T[] => {
+    const result = [];
+    for(const item of arr1) {
+        if (arr2.includes(item) && arr3.includes(item)){
+            result.push(item);
+        }
+    }
+    return result;
+}
+console.log(
+  intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
+);
+// should log: [5, 15]
 
 // // ________________________________________________________________________________________________
 // // Challenge 8
