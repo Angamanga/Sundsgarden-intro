@@ -74,17 +74,40 @@ const parseInitialTime = (initTime: string): Date => {
 };
 
 // Fetching data from an API
-fetch('https://www.7timer.info/bin/astro.php?lon=129.7319787&lat=62.0274078&ac=0&unit=metric&output=json&tzshift=0')
-    .then((response) => response.json())
-    .then((data) => {
-        // Getting a human readable date out of the initial time-stamp
-        let date = parseInitialTime(data.init);
-        // Adding the offset for the first forecast
-        date.setUTCHours(date.getUTCHours() + data.dataseries[0].timepoint);
+const fetchWeather = () => {
+    console.log("Fetching weather....");
+    fetch('https://www.7timer.info/bin/astro.php?lon=129.7319787&lat=62.0274078&ac=0&unit=metric&output=json&tzshift=0')
+        .then((response) => response.json())
+        .then((data) => {
+            // Getting a human readable date out of the initial time-stamp
+            let date = parseInitialTime(data.init);
+            // Adding the offset for the first forecast
+            date.setUTCHours(date.getUTCHours() + data.dataseries[0].timepoint);
 
-        console.log(`The weather in Yakutsk at ${date} was ${data.dataseries[0].temp2m} degrees Celcius`);
+            console.log(`The weather in Yakutsk at ${date} was ${data.dataseries[0].temp2m} degrees Celcius`);
+        })
+        .catch((err) => {
+            console.log("Oh no, something went wrong!\n");
+            console.log(`Error-response: ${err}`);
+        });
+};
+
+// Mix it up
+// Fetching weather if the user wins the game
+
+// Callback to fetch weather on winning the game
+const fetchWeatherOnWin = (result: string): void => {
+    if (result === "You won!") {
+        console.log(`You won!!! Yay! Fetching the weather in Yakutsk!`);
+        fetchWeather();
+    } else {
+        console.log(result);
+    }
+};
+
+// Testing the mixup
+playGame("sax")
+    .then(result => {
+        fetchWeatherOnWin(result);
     })
-    .catch((err) => {
-        console.log("Oh no, something went wrong!\n");
-        console.log(`Error-response: ${err}`);
-    });
+    .catch(error => console.log(error));
