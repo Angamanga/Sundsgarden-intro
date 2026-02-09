@@ -72,3 +72,24 @@ const fetchWeather = async () => {
 };
 
 fetchWeather();
+
+// Mix it up
+// Fetching weather if the user wins the game
+
+// Fetch weather on winning the game
+const fetchWeatherOnWin = async (gesture: Gesture) => {
+    try {
+        const result = await gamePromise(gesture);
+        if (result === "You won!") {
+            console.log(`You won!!! Yay! Fetching the weather in Yakutsk!`);
+            fetchWeather();
+        } else {
+            console.log(result);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Testing the mixup
+fetchWeatherOnWin("sax");
