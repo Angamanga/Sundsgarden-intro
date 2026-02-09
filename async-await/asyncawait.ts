@@ -23,3 +23,17 @@ const gamePromise = (gesture: Gesture): Promise<string> => {
         }
     });
 };
+
+const playGame = async (gesture: Gesture) => {
+    try {
+        const response = await gamePromise(gesture);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Testing the game!
+playGame("sax");
+playGame("pase");
+playGame("blaha");
