@@ -1,6 +1,6 @@
 // A function that searches for jobs
 // A function that runs our app
-// the command to start everything
+// The command to start everything
 
 const searchJobs = async (keyword: string) => {
   try {
@@ -10,11 +10,11 @@ const searchJobs = async (keyword: string) => {
 
     console.log(`\nFound ${data.hits.length} jobs`);
     console.log("-".repeat(50));
-    //console.log(data);
+    //Console.log(data);
 
     data.hits.forEach((job: any, index: number) => {
       const pubDate = new Date(job.publication_date);
-      //console.log("pubDate: ", pubDate);
+      //Console.log("pubDate: ", pubDate);
 
       console.log(`${index + 1}. ${job.headline}`);
       console.log(`Company: ${job.employer.name}`);
