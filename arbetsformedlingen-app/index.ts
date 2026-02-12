@@ -21,13 +21,10 @@ const searchJobs = async (keyword: string) => {
 
     console.log(`\nFound ${data.hits.length} jobs`);
     console.log("-".repeat(50));
-    //Console.log(data);
 
     data.hits.forEach((job: Job, index: number) => {
       const pubDate = new Date(job.publication_date);
       //Console.log("pubDate: ", pubDate);
-
-      console.log(`${index + 1}. ${job.headline}`);
       console.log(`Company: ${job.employer.name}`);
       console.log(`Location: ${job.workplace_address.municipality}`);
       console.log(`Publication: ${pubDate.toISOString().split("T")[0]}`);
