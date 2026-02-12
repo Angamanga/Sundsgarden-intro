@@ -1,6 +1,7 @@
 // A function that searches for jobs
 // A function that runs our app
 // The command to start everything
+import * as readline from "readline";
 
 interface Job {
   headline: string;
@@ -13,9 +14,15 @@ interface Job {
   };
 }
 
-const searchJobs = async (keyword: string) => {
+// Create readline interface
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+const searchJobs = async (keywords: string) => {
   try {
-    const result = `https://jobsearch.api.jobtechdev.se/search?q=${keyword}&offset=0&limit=10`;
+    const result = `https://jobsearch.api.jobtechdev.se/search?q=${keywords}&offset=0&limit=10`;
     const response = await fetch(result);
     const data = await response.json();
 
@@ -24,7 +31,7 @@ const searchJobs = async (keyword: string) => {
 
     data.hits.forEach((job: Job, index: number) => {
       const pubDate = new Date(job.publication_date);
-      //Console.log("pubDate: ", pubDate);
+      console.log(`${index + 1}. ${job.headline}`);
       console.log(`Company: ${job.employer.name}`);
       console.log(`Location: ${job.workplace_address.municipality}`);
       console.log(`Publication: ${pubDate.toISOString().split("T")[0]}`);
@@ -35,12 +42,20 @@ const searchJobs = async (keyword: string) => {
   }
 };
 
-const runApp = () => {
+const runApp = async () => {
   try {
     console.log("Welcome to the Job Search App!");
     console.log("This app searches for jobs using JobTeach API");
-    const keyword = "Helsingborg";
-    searchJobs(keyword);
+
+    const keywords = await new Promise<string>((resolve) => {
+      rl.question("What do you want to search for?", resolve);
+    });
+
+    // Formatting the the input to fit url-encoding-standards.
+    const encodedKeywords = encodeURIComponent(keywords);
+    console.log("Searching...");
+    searchJobs(encodedKeywords);
+    rl.close();
   } catch (error) {
     console.error(error);
   }
