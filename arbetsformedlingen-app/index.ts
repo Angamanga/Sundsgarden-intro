@@ -2,6 +2,17 @@
 // A function that runs our app
 // The command to start everything
 
+interface Job {
+  headline: string;
+  publication_date: string;
+  employer: {
+    name: string;
+  };
+  workplace_address: {
+    municipality: string;
+  };
+}
+
 const searchJobs = async (keyword: string) => {
   try {
     const result = `https://jobsearch.api.jobtechdev.se/search?q=${keyword}&offset=0&limit=10`;
@@ -12,7 +23,7 @@ const searchJobs = async (keyword: string) => {
     console.log("-".repeat(50));
     //Console.log(data);
 
-    data.hits.forEach((job: any, index: number) => {
+    data.hits.forEach((job: Job, index: number) => {
       const pubDate = new Date(job.publication_date);
       //Console.log("pubDate: ", pubDate);
 
