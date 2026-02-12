@@ -20,9 +20,15 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Error-handler to avoid duplicated code
+const handleError = (error: unknown) => {
+  console.error("Oh no, something did not go as planned.");
+  console.error(`Error-message: ${error}`);
+};
+
 const searchJobs = async (keywords: string) => {
   try {
-    const result = `https://jobsearch.api.jobtechdev.se/search?q=${keywords}&offset=0&limit=10`;
+    const result = `https://jobsearch.apisss.jobtechdev.se/search?q=${keywords}&offset=0&limit=10`;
     const response = await fetch(result);
     const data = await response.json();
 
@@ -32,8 +38,8 @@ const searchJobs = async (keywords: string) => {
     data.hits.forEach((job: Job, index: number) => {
       const pubDate = new Date(job.publication_date);
       // Experimenting with console.dir
-      // console.dir(job.employer);
-      // console.dir(job.workplace_address);
+      // Console.dir(job.employer);
+      // Console.dir(job.workplace_address);
       console.log(`${index + 1}. ${job.headline}`);
       console.log(`Company: ${job.employer.name}`);
       console.log(`Location: ${job.workplace_address.municipality}`);
@@ -41,7 +47,7 @@ const searchJobs = async (keywords: string) => {
       console.log("-".repeat(50));
     });
   } catch (error) {
-    console.error(error);
+    handleError(error);
   }
 };
 
@@ -51,7 +57,7 @@ const runApp = async () => {
     console.log("This app searches for jobs using JobTeach API");
 
     const keywords = await new Promise<string>((resolve) => {
-      rl.question("What do you want to search for?", resolve);
+      rl.question("What do you want to search for? ", resolve);
     });
 
     // Formatting the the input to fit url-encoding-standards.
@@ -60,7 +66,7 @@ const runApp = async () => {
     searchJobs(encodedKeywords);
     rl.close();
   } catch (error) {
-    console.error(error);
+    handleError(error);
   }
 };
 
