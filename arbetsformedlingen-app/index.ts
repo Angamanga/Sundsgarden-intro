@@ -31,6 +31,9 @@ const searchJobs = async (keywords: string) => {
 
     data.hits.forEach((job: Job, index: number) => {
       const pubDate = new Date(job.publication_date);
+      // Experimenting with console.dir
+      // console.dir(job.employer);
+      // console.dir(job.workplace_address);
       console.log(`${index + 1}. ${job.headline}`);
       console.log(`Company: ${job.employer.name}`);
       console.log(`Location: ${job.workplace_address.municipality}`);
